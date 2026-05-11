@@ -15,7 +15,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 5001;
+const PORT = 5001;
 
 // Middleware
 app.use(compression());
@@ -24,7 +24,9 @@ app.use(express.json());
 
 // Database connection
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(
+    "mongodb+srv://faufan:AXWBJXFXJQrwfeNX@cluster0.gafxsoi.mongodb.net/?appName=Cluster0",
+  )
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error(err));
 

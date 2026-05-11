@@ -26,15 +26,17 @@ router.post(
       const user = new User({ username, email, password });
       await user.save();
 
-      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "7d",
+      const token = jwt.sign(
+        { userId: user._id },
+        "your_super_secret_key_change_this",
+        {
+          expiresIn: "7d",
+        },
+      );
+      res.status(201).json({
+        token,
+        user: { id: user._id, username: user.username, email: user.email },
       });
-      res
-        .status(201)
-        .json({
-          token,
-          user: { id: user._id, username: user.username, email: user.email },
-        });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
@@ -59,9 +61,13 @@ router.post(
       if (!isMatch)
         return res.status(401).json({ error: "Invalid credentials" });
 
-      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "7d",
-      });
+      const token = jwt.sign(
+        { userId: user._id },
+        "your_super_secret_key_change_this",
+        {
+          expiresIn: "7d",
+        },
+      );
       res.json({
         token,
         user: { id: user._id, username: user.username, email: user.email },
