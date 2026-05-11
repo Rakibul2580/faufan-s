@@ -59,6 +59,10 @@ app.get("/:shortCode", async (req, res, next) => {
   }
 });
 
+app.get("/", async (req, res) => {
+  res.send("Welcome to SortLink API");
+});
+
 // API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/links", linkRoutes);
