@@ -70,9 +70,11 @@ app.use("/api/links", linkRoutes);
 // Health check
 app.get("/api/health", (req, res) => res.send("OK"));
 
-// Serve frontend static files (after building)
+// ফ্রন্টএন্ড বিল্ড ফাইল সার্ভ করা (স্ট্যাটিক ফাইল)
 const frontendDist = path.join(__dirname, "../frontend/dist");
 app.use(express.static(frontendDist));
+
+// সব অজানা পাথ (যেটা API বা shortCode না) index.html পাঠাবে
 app.get("*", (req, res) => {
   res.sendFile(path.join(frontendDist, "index.html"));
 });
